@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use Core\View;
 
+use App\Model\PruebaModel;
+
 class Home
 {
     public function index()
@@ -13,10 +15,17 @@ class Home
             $args  = ['title' => 'Home'];
             View::render($views, $args);
         }else{
-            $views = ['home/example'];
-            $args  = ['title' => 'Home | Example'];
+            $views = ['home/example_with_args'];
+
+            $result = new PruebaModel();
+            $args  = [
+                'title' => 'Home | Example',
+                'id' => $result->a()
+            ];
             View::render($views, $args);
         }
+
+
     }
 
     public function example()
