@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 define('ROOT', dirname(__DIR__).DIRECTORY_SEPARATOR);
 define('APP', ROOT.'App'.DIRECTORY_SEPARATOR);
 define('VIEWS', APP.'Views'.DIRECTORY_SEPARATOR);

@@ -8,9 +8,15 @@ class Home
 {
     public function index()
     {
-        $views = ['home/index'];
-        $args  = ['title' => 'Home'];
-        View::render($views, $args);
+        if(isset($_SESSION["id"])){
+            $views = ['home/index'];
+            $args  = ['title' => 'Home'];
+            View::render($views, $args);
+        }else{
+            $views = ['home/example'];
+            $args  = ['title' => 'Home | Example'];
+            View::render($views, $args);
+        }
     }
 
     public function example()

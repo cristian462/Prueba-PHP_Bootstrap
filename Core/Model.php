@@ -13,6 +13,7 @@ class Model
     {
         try {
             self::openDatabaseConnection();
+            print_r ("yes!");
         } catch (\PDOException $e) {
             exit('Database connection could not be established.');
         }
