@@ -56,7 +56,7 @@ class Home
             if(isset($_POST["submit"])){
                 $params["nombre"] = recoge("nombre");
                 $params["pass"] = recoge("pass");
-                $params["pass2"] = recoge("nombre");
+                $params["pass2"] = recoge("pass2");
 
                 if(empty($params["nombre"]) || empty($params["pass"])){
                     $params["error"] = "Por favor, rellena todos los datos del formulario";
