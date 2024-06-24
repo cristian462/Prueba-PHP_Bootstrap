@@ -22,7 +22,7 @@ class Model
             exit('Database connection could not be established. Error: ' . $e->getMessage());
         }
     }
-}
+
 
     // public $db = null;
 
@@ -43,3 +43,6 @@ class Model
     //         PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING
     //     ];
     //     $this->db = new PDO($dsn, Config::DB_USER, Config::DB_PASS, $options);
+    // }
+
+}

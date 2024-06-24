@@ -8,6 +8,9 @@ class View
 {
     public static function render($views = [], $args = [], $header = 'templates/header', $footer = 'templates/footer')
     {
+        if(!isset($_SESSION["id"])){
+            $header = 'templates/guest';
+        }
         $baseUrl = Util::baseUrl();
         extract($args, EXTR_SKIP);
 

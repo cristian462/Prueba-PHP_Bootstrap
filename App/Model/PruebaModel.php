@@ -14,21 +14,25 @@ class PruebaModel extends Model
         $query->bindParam(2, $pass);
         $query->bindParam(3, $fecha);
         $query->execute();
+
+        return $this->db->lastInsertId();
     }
 
     public function Login($nombre, $pass)
     {
-        $sql = "SELECT pass FROM usuarios WHERE nombre = ?";
+        $sql = "SELECT id_user, pass FROM usuarios WHERE nombre = ?";
         $query = $this->db->prepare($sql);
         $query->execute([$nombre]);
         $encryptPass = $query->fetchColumn();
 
-        return password_verify($pass, $encryptPass);
+        if(password_verify($pass, $encryptPass)){
+
+        }
     }
 
     public function a()
     {
-        $sql = "SELECT nombre FROM usuarios";
+        $sql = "SELECT nombre FROM usuarios WHERE id_user = 1";
         $query = $this->db->prepare($sql);
         $query->execute();
 

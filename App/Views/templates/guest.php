@@ -45,14 +45,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?= $baseUrl ?>Home">Home</a>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= $baseUrl ?>test">Page Not Found</a>
+                        <a class="nav-link" href="<?= $baseUrl ?>Home/signup">SignUp</a>
                     </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="btn btn-danger" href="<?= $baseUrl ?>Home/logout">Logout</a>
+                        <a class="nav-link" href="<?= $baseUrl ?>Home/login">LogIn</a>
                     </li>
                 </ul>
             </div>
