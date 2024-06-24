@@ -38,4 +38,13 @@ class PruebaModel extends Model
         return 0;
     }
 
+    public function profile($id)
+    {
+        $sql = "SELECT nombre, fecha FROM usuarios WHERE id_user = ?";
+        $query = $this->db->prepare($sql);
+        $query->execute([$id]);
+
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
 }

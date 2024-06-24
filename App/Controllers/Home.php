@@ -14,9 +14,33 @@ class Home
 {
     public function index()
     {
-        $views = ['home/index'];
-        $args  = ['title' => 'Home'];
-        View::render($views, $args);
+        if(isset($_SESSION["id"])){
+            try{
+                $model = new PruebaModel();
+                $result = $model->profile($_SESSION["id"]);
+
+                $views = ['home/index'];
+                $args  = ['title' => 'Home',
+                          'name' => 'Name: '.$result["nombre"],
+                          'date' => 'Registration Date: '.$result["fecha"]
+                         ];
+                View::render($views, $args);
+            }catch(Exception $e){
+                $views = ['home/index'];
+                $args  = ['title' => 'Home',
+                          'name' => 'Home',
+                          'date' => ''
+                         ];
+                View::render($views, $args);
+            }
+        }else{
+            $views = ['home/index'];
+            $args  = ['title' => 'Home',
+                      'name' => 'Home',
+                      'date' => ''
+                     ];
+            View::render($views, $args);
+        }
     }
 
     public function signUp()
