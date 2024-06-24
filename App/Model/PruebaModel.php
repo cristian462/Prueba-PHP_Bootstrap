@@ -4,6 +4,8 @@ namespace App\Model;
 
 use Core\Model;
 
+use PDO;
+
 class PruebaModel extends Model
 {
     public function signUp($nombre, $pass, $fecha)
@@ -18,24 +20,22 @@ class PruebaModel extends Model
         return $this->db->lastInsertId();
     }
 
-    public function Login($nombre, $pass)
+    public function login($nombre, $pass)
     {
         $sql = "SELECT id_user, pass FROM usuarios WHERE nombre = ?";
         $query = $this->db->prepare($sql);
         $query->execute([$nombre]);
-        $encryptPass = $query->fetchColumn();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if(password_verify($pass, $encryptPass)){
+        if ($result) {
+            $id_user = $result['id_user'];
+            $encryptPass = $result['pass'];
 
+            if (password_verify($pass, $encryptPass)) {
+                return $id_user;
+            }
         }
+        return 0;
     }
 
-    public function a()
-    {
-        $sql = "SELECT nombre FROM usuarios WHERE id_user = 1";
-        $query = $this->db->prepare($sql);
-        $query->execute();
-
-        return $query->fetchAll();
-    }
 }

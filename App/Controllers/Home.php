@@ -34,8 +34,16 @@ class Home
                 $params["pass"] = recoge("pass");
                 $params["pass2"] = recoge("nombre");
 
-                if(empty($params["nombre"]) || empty($params["pass"]) || empty($params["pass2"])){
+                if(empty($params["nombre"]) || empty($params["pass"])){
                     $params["error"] = "Por favor, rellena todos los datos del formulario";
+                }
+
+                if (strlen($params["nombre"]) > 20){
+                    $params["error"] = "El nombre es demasiado largo.";
+                }
+
+                if (strlen($params["pass"]) > 16){
+                    $params["error"] = "La contraseña es demasiado larga.";
                 }
 
                 if($params["pass"] !== $params["pass2"]){
@@ -71,7 +79,7 @@ class Home
                      ];
             View::render($views, $args);
         }else{
-
+            header("Location: http://app.local");
         }
     }
 
@@ -80,12 +88,52 @@ class Home
         if(!isset($_SESSION["id"])){
             $params=array(
                 "nombre"=>'',
-                "pass"=>''
+                "pass"=>'',
+                "error"=>''
             );
+
+            if(isset($_POST["submit"])){
+                $params["nombre"] = recoge("nombre");
+                $params["pass"] = recoge("pass");
+
+                if (strlen($params["nombre"]) > 20 || strlen($params["pass"]) > 16){
+                    $params["error"] = "Usuario o contraseña incorrectos.";
+                }
+
+                if(empty($params["error"])){
+                    try{
+                        $model = new PruebaModel();
+                        $id = $model->login($params["nombre"],$params["pass"]);
+
+                        if($id > 0){
+                            $_SESSION["id"] = $id;
+                            header("Location: http://app.local");
+                        }else{
+                            $views = ['home/login'];
+                            $args  = ['title' => 'Home',
+                                      'error' => 'Usuario o contraseña incorrectos.'
+                                     ];
+                            View::render($views, $args);
+                        }
+                    }catch(Exception $e){
+                        $views = ['home/login'];
+                        $args  = ['title' => 'Home',
+                                  'error' => 'Usuario o contraseña incorrectos.'
+                                 ];
+                        View::render($views, $args);
+                    }
+                }else{
+                    $views = ['home/login'];
+                    $args  = ['title' => 'Home',
+                              'error' => $params["error"]
+                             ];
+                    View::render($views, $args);
+                }
+            }
 
             $views = ['home/login'];
             $args  = ['title' => 'Home',
-                      'error' => 'Usuario o contraseña incorrectos.'
+                      'error' => ''
                      ];
             View::render($views, $args);
         }else{

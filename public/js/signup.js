@@ -31,9 +31,15 @@ window.onload = function (){
           nombre.classList.add("is-invalid");
           document.getElementById("nombreMal").innerText = "No puede quedar vacío este campo.";
         } else {
-          nombre.classList.remove("is-invalid");
-          nombre.classList.add("is-valid");
-          document.getElementById("nombreMal").innerText = "";
+          if(nom.length>20) {
+            nombre.classList.remove("is-valid");
+            nombre.classList.add("is-invalid");
+            document.getElementById("nombreMal").innerText = "El nombre es demasiado largo";
+          }else{
+            nombre.classList.remove("is-invalid");
+            nombre.classList.add("is-valid");
+            document.getElementById("nombreMal").innerText = "";
+          }
         }
       });
 
@@ -49,9 +55,15 @@ window.onload = function (){
           pass.classList.add("is-invalid");
           document.getElementById("passMal").innerText = "No puede quedar vacío este campo.";
         } else {
-          pass.classList.remove("is-invalid");
-          pass.classList.add("is-valid");
-          document.getElementById("passMal").innerText = "";
+          if(pass.value.length>16){
+            pass.classList.remove("is-valid");
+            pass.classList.add("is-invalid");
+            document.getElementById("passMal").innerText = "La contraseña es demasiado larga";
+          }else{
+            pass.classList.remove("is-invalid");
+            pass.classList.add("is-valid");
+            document.getElementById("passMal").innerText = "";
+          }
         }
       });
 
