@@ -9,7 +9,8 @@ services:
       - .:/var/www/html
       - ./apache:/etc/apache2/sites-available
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 172.18.0.3  # Dirección IP para el contenedor web
 
   db:
     image: mysql:5.7
@@ -24,7 +25,8 @@ services:
     volumes:
       - db-data:/var/lib/mysql
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 172.18.0.2  # Dirección IP deseada para el contenedor MySQL
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -35,10 +37,16 @@ services:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: rootpassword
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 172.18.0.4  # Dirección IP para el contenedor phpMyAdmin
 
 volumes:
   db-data:
 
 networks:
   app-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.0/16
