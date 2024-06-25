@@ -42,7 +42,7 @@ Añadir la siguiente linea en el archivo host:
 127.0.0.1 app.local
 ```
 
-### Paso 3: Acceda al navegador
+### Paso 4: Acceda al navegador
 Entre en:
 ```
 http://app.local
