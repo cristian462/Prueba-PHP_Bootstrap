@@ -1,4 +1,4 @@
-# Proyecto de Prueba: Aplicación Web Básica en PHP y Bootstrap
+# Registro e Inicio de Sesión con PHP y Bootrsap
 
 ## Descripción
 Este proyecto es una aplicación web básica que permite a los usuarios registrarse, iniciar sesión y ver su nombre y fecha de registro. La aplicación está desarrollada utilizando PHP, MySQL, HTML5, CSS, Bootstrap 4 y JavaScript y JQuery.
